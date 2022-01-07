@@ -1,6 +1,9 @@
 
 import express from 'express';
 import configViewEngine from './configs/ViewEngine';
+// import thư mục router
+import initWebRoute from './route/web';
+
 // require file .env
 require('dotenv').config();
 
@@ -13,10 +16,8 @@ const port = process.env.PORT || 8080;
 // gọi config View Engine ra và truyền vào tham số app.
 configViewEngine(app);
 
-// router
-app.get('/', (req, res) => {
-    res.render('index.ejs')
-})
+// init web route
+initWebRoute(app);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
