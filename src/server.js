@@ -3,6 +3,7 @@ import express from 'express';
 import configViewEngine from './configs/ViewEngine';
 // import thư mục router
 import initWebRoute from './route/web';
+//import connection from './configs/connectDB';
 
 // require file .env
 require('dotenv').config();

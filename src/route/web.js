@@ -11,6 +11,10 @@ const initWebRoute = (app) => {
     // homeController có hàm getHomePage tương ứng.
     router.get('/', homeController.getHomePage);
 
+    router.get('/about', (req, res) => {
+        res.send("About về Khương");
+    })
+
     // Return về đường link mặc định để mình init tất cả router.
     // Gọi chung là tiền tố thêm vào.
     return app.use('/', router);
