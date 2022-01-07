@@ -5,7 +5,7 @@ let getHomePage = (req, res) => {
     let data = [];
     connection.query(
         'SELECT * FROM `users` ',
-        function (err, results, fields) {
+        (err, results, fields) => {
             results.map((row) => {
                 data.push({
                     id: row.id,
@@ -15,7 +15,8 @@ let getHomePage = (req, res) => {
                     lastName: row.lastName
                 })
             });
-            return res.render('index.ejs', { dataUser: JSON.stringify(data) })
+            // response về view: index.ejs và trả về chuỗi JSON dataUser tương ứng
+            return res.render('index.ejs', { dataUser: data, test: 'abc string test' })
         })
 }
 
