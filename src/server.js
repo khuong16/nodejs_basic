@@ -1,9 +1,14 @@
 
 import express from 'express';
 import configViewEngine from './configs/ViewEngine';
+// require file .env
+require('dotenv').config();
 
 const app = express()
-const port = 3000
+
+// gọi file env thông qua tham số process.
+// sử dụng "||" để backUp port khi trc đó bị underfined.
+const port = process.env.PORT || 8080;
 
 // gọi config View Engine ra và truyền vào tham số app.
 configViewEngine(app);
