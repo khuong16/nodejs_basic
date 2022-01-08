@@ -41,9 +41,7 @@
                     <div>
                         <button type="submit" class="btn-submit">Submit</button>
                     </div>
-
                 </form>
-
             </div>
             <table class="w3-table-all w3-hoverable">
                 <thead>
@@ -69,14 +67,17 @@
                                 </td>
                                 <td>
                                     <a href="/detail/user/<%= dataUser[i].id %>" target="_blank">Detail</a>
-                                    <button type="button">Edit</button>
-                                    <button type="button">Delete</button>
+                                    <form action="/edit-user/<%= dataUser[i].id %>" method="GET">
+                                        <button type="submit">Edit</button>
+                                    </form>
+                                    <form action="/delete-user" method="POST">
+                                        <input type="text" hidden value="<%= dataUser[i].id %>" name="userId" />
+                                        <button type="submit">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             <% } %>
                 </tbody>
-
-
             </table>
         </div>
     </div>
