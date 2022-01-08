@@ -30,6 +30,8 @@ const imageFilter = function (req, file, cb) {
 
 let upload = multer({ storage: storage, fileFilter: imageFilter });
 
+let uploadMultipleFiles = multer({ storage: storage, fileFilter: imageFilter }).array('multiple_images', 3);
+
 let router = express.Router();
 
 // Định nghĩa các router:
@@ -57,6 +59,24 @@ const initWebRoute = (app) => {
 
     // sau khi router cần có 1 middleware là upload.single
     router.post('/upload-profile-pic', upload.single('profile_pic'), homeController.handleUploadFile);
+
+    // multiple file upload.
+    // check max file when upload.
+    router.post('/upload-multiple-images', (req, res, next) => {
+        uploadMultipleFiles(req, res, (err) => {
+            if (err instanceof multer.MulterError && err.code === "LIMIT_UNEXPECTED_FILE") {
+                // handle multer file limit error here
+                res.send('LIMIT_UNEXPECTED_FILE')
+            } else if (err) {
+                res.send(err)
+            }
+
+            else {
+                // make sure to call next() if all was well
+                next();
+            }
+        })
+    }, homeController.handleUploadMultipleFile)
 
     // Return về đường link mặc định để mình init tất cả router.
     // Gọi chung là tiền tố thêm vào.
