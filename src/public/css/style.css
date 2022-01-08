@@ -55,3 +55,12 @@ body {
     margin-top: 15px;
     cursor: pointer;
 }
+
+/* css for upload file*/
+.upload-file-container {
+    padding: 15px;
+}
+
+.upload-file-container label {
+    display: block;
+}
