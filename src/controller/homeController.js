@@ -1,26 +1,21 @@
-import connection from '../configs/connectDB';
+import pool from '../configs/connectDB';
 
-let getHomePage = (req, res) => {
-    //logic
-    let data = [];
-    connection.query(
-        'SELECT * FROM `users` ',
-        (err, results, fields) => {
-            results.map((row) => {
-                data.push({
-                    id: row.id,
-                    email: row.email,
-                    address: row.address,
-                    firstName: row.firstName,
-                    lastName: row.lastName
-                })
-            });
-            // response về view: index.ejs và trả về chuỗi JSON dataUser tương ứng
-            return res.render('index.ejs', { dataUser: data, test: 'abc string test' })
-        })
+// get data
+let getHomePage = async (req, res) => {
+    const [rows, fields] = await pool.execute('SELECT * FROM users');
+
+    return res.render('index.ejs', { dataUser: rows, test: 'abc string test' })
 }
 
-// có thể export nhiều module.
+// get detail data
+let getDetailPage = async (req, res) => {
+    // biến id đc nhận từ web.js ở params.
+    let userId = req.params.id;
+    // nhận result của statement thông qua biến user đang đc lưu.
+    let [user] = await pool.execute(`select * from users where id = ?`, [userId]);
+    return res.send(JSON.stringify(user))
+}
+
 module.exports = {
-    getHomePage
+    getHomePage, getDetailPage
 }
