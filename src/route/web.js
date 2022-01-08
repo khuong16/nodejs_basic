@@ -12,7 +12,11 @@ const initWebRoute = (app) => {
     // homeController có hàm getHomePage tương ứng.
     router.get('/', homeController.getHomePage);
 
+    // chi tiết người dùng
     router.get('/detail/user/:id', homeController.getDetailPage);
+
+    // thêm người dùngh
+    router.post('/create-new-user', homeController.createNewUser);
 
     // Return về đường link mặc định để mình init tất cả router.
     // Gọi chung là tiền tố thêm vào.

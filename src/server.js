@@ -14,6 +14,11 @@ const app = express()
 // sử dụng "||" để backUp port khi trc đó bị underfined.
 const port = process.env.PORT || 8080;
 
+// config express hỗ trợ cho mình gửi data từ client xuống server
+// để mình có thể lấy đơn giản.
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // gọi config View Engine ra và truyền vào tham số app.
 configViewEngine(app);
 
